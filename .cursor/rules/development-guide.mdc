@@ -1,0 +1,95 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Voyage 项目开发规则
+
+## 核心技术栈
+
+**必须使用以下技术栈进行开发：**
+
+### 1. Vue 3
+- 使用 Vue 3 Composition API
+- 优先使用 `<script lang="ts" setup>` 语法
+- 组件文件使用 `.vue` 扩展名
+- 参考项目配置：[package.json](mdc:package.json)
+
+### 2. TypeScript
+- 所有脚本代码必须使用 TypeScript
+- 配置文件参考：[tsconfig.json](mdc:tsconfig.json)
+- 类型定义文件存放在 `entrypoints/types/` 目录
+
+### 3. Less
+- 样式预处理器使用 Less
+- 样式代码使用 `<style lang="less">` 或 `<style lang="less" scoped>`
+
+### 4. Naive UI 组件库
+- **必须使用 Naive UI (https://www.naiveui.com/zh-CN/light) 作为唯一的UI组件库**
+- 不要引入其他UI组件库（如 Element Plus、Ant Design Vue等）
+- 组件导入使用按需引入方式
+- 参考使用示例：[entrypoints/popup/App.vue](mdc:entrypoints/popup/App.vue)
+
+## 项目结构规范
+
+**严格遵循现有的项目文件结构，不要轻易修改：**
+
+### 主要目录结构
+```
+voyage/
+├── components/           # 公共组件
+├── entrypoints/         # 入口点文件
+│   ├── background/      # 后台脚本
+│   ├── common/          # 公共模块
+│   ├── content/         # 内容脚本
+│   ├── options/         # 选项页面
+│   ├── popup/           # 弹窗页面
+│   └── types/           # 类型定义
+└── public/              # 静态资源
+```
+
+### 文件命名规范
+- Vue组件文件：使用 kebab-case 命名，如 `popup-header.vue`
+- TypeScript文件：使用 camelCase 命名，如 `useBoardState.ts`
+- 样式文件：使用 kebab-case 命名，如 `style.css`
+
+## 开发规范
+
+### 1. 组件开发
+- 使用 Vue 3 Composition API
+- 优先使用 `<script setup>` 语法
+- 必须添加 TypeScript 类型注解
+- 使用 Naive UI 组件构建界面
+- **组件的功能逻辑尽可能通过 hooks 实现，使用 use 函数封装同一个模块的逻辑**
+- 将相关的状态、计算属性、方法封装到自定义 hooks 中，保持组件的简洁性
+
+### 2. 状态管理
+- 使用 Vue 3 的 `ref`、`reactive`、`computed` 等响应式API
+- 复杂状态逻辑封装为自定义 Hooks（如 `useBoardState.ts`）
+- **Hooks 命名规范：**
+  - 使用 `use` 开头，如 `useFeatureConfig`、`useBoardState`
+  - 文件名使用 camelCase，如 `useFeatureConfig.ts`
+  - 将相关的状态、计算属性、副作用逻辑组织在同一个 Hook 中
+- **Hooks 组织原则：**
+  - 按功能模块划分 Hooks，避免单个 Hook 过于复杂
+  - 提供清晰的返回值类型定义
+  - 支持参数传递，增强复用性
+  - 参考现有实现：`entrypoints/popup/hooks/`、`entrypoints/content/board-tools/hooks/`
+
+### 3. 样式规范
+- 使用 Less 预处理器
+- 优先使用 scoped 样式避免全局污染
+
+### 4. 配置文件
+- 项目配置：[wxt.config.ts](mdc:wxt.config.ts)
+- ESLint配置：[eslint.config.js](mdc:eslint.config.js)
+- 包管理：[package.json](mdc:package.json)
+
+## 重要提醒
+
+1. **不要修改现有的目录结构**
+2. **必须使用 Naive UI 组件库，不要引入其他UI框架**
+3. **保持与现有代码风格的一致性**
+4. **遵循TypeScript类型安全原则**
+5. **使用项目已配置的工具链（ESLint、Prettier等）**
+
