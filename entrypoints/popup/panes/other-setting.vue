@@ -10,12 +10,12 @@
 			</div>
 
 			<div class="tools-section">
-				<div class="tool-item">
+				<div v-for="tool in tools" :key="tool.id" class="tool-item">
 					<div class="tool-info">
-						<div class="tool-title">自动化用例数据</div>
-						<div class="tool-desc">管理和查看自动化测试用例数据</div>
+						<div class="tool-title">{{ tool.title }}</div>
+						<div class="tool-desc">{{ tool.description }}</div>
 					</div>
-					<n-button type="primary" size="small" @click="openPage">
+					<n-button type="primary" size="small" @click="tool.action">
 						打开页面
 					</n-button>
 				</div>
@@ -25,11 +25,35 @@
 </template>
 
 <script lang="ts" setup>
-const openPage = () => {
-	chrome.tabs.create({
-		url: chrome.runtime.getURL('playground.html'),
-	})
+interface Tool {
+	id: string
+	title: string
+	description: string
+	action: () => void
 }
+
+const tools: Tool[] = [
+	{
+		id: 'automation-data',
+		title: '自动化用例数据',
+		description: '管理和查看自动化测试用例数据',
+		action: () => {
+			chrome.tabs.create({
+				url: chrome.runtime.getURL('playground.html'),
+			})
+		},
+	},
+	{
+		id: 'json-factory',
+		title: 'JSON Factory',
+		description: 'JSON 数据生成和处理工具',
+		action: () => {
+			chrome.tabs.create({
+				url: chrome.runtime.getURL('json-factory.html'),
+			})
+		},
+	},
+]
 </script>
 
 <style scoped>
