@@ -1,4 +1,5 @@
 import { ref, Ref } from 'vue'
+import { useMessage } from 'naive-ui'
 import { useJsonEditor } from './useJsonEditor'
 
 export function useJsonFormatter(
@@ -7,6 +8,7 @@ export function useJsonFormatter(
 	indentSize?: Ref<number | string>
 ) {
 	const formatting = ref(false)
+	const message = useMessage()
 
 	const {
 		inputJson,
@@ -15,6 +17,7 @@ export function useJsonFormatter(
 		formatJsonData,
 		copyToClipboard,
 		clearEditor,
+		setEditorContent,
 	} = useJsonEditor(indentSize)
 
 	function initializeEditors() {
@@ -67,5 +70,6 @@ export function useJsonFormatter(
 		clearInput,
 		copyFormatted,
 		initializeEditors,
+		setEditorContent,
 	}
 }

@@ -1,33 +1,35 @@
 <template>
-	<div class="json-factory-container">
-		<div class="header">
-			<h1 class="title">
-				<span class="icon">🔧</span>
-				JSON 工厂
-			</h1>
-			<p class="subtitle">强大的 JSON 处理工具集</p>
+	<n-message-provider>
+		<div class="json-factory-container">
+			<div class="header">
+				<h1 class="title">
+					<span class="icon">🔧</span>
+					JSON 工厂
+				</h1>
+				<p class="subtitle">强大的 JSON 处理工具集</p>
+			</div>
+
+			<n-tabs
+				v-model:value="activeTab"
+				type="line"
+				size="large"
+				animated
+				class="main-tabs"
+			>
+				<n-tab-pane name="format" tab="JSON 格式化">
+					<JsonFormatter />
+				</n-tab-pane>
+
+				<n-tab-pane name="compress" tab="JSON 压缩">
+					<JsonCompressor />
+				</n-tab-pane>
+
+				<n-tab-pane name="compare" tab="JSON 对比">
+					<JsonComparator />
+				</n-tab-pane>
+			</n-tabs>
 		</div>
-
-		<n-tabs
-			v-model:value="activeTab"
-			type="line"
-			size="large"
-			animated
-			class="main-tabs"
-		>
-			<n-tab-pane name="format" tab="JSON 格式化">
-				<JsonFormatter />
-			</n-tab-pane>
-
-			<n-tab-pane name="compress" tab="JSON 压缩">
-				<JsonCompressor />
-			</n-tab-pane>
-
-			<n-tab-pane name="compare" tab="JSON 对比">
-				<JsonComparator />
-			</n-tab-pane>
-		</n-tabs>
-	</div>
+	</n-message-provider>
 </template>
 
 <script lang="ts" setup>

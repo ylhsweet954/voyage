@@ -1,4 +1,5 @@
 import { ref, Ref } from 'vue'
+import { useMessage } from 'naive-ui'
 import { useJsonEditor } from './useJsonEditor'
 
 export function useJsonCompressor(
@@ -6,6 +7,7 @@ export function useJsonCompressor(
 	compressOutputEditorRef: Ref<HTMLElement | undefined>
 ) {
 	const compressing = ref(false)
+	const message = useMessage()
 
 	const {
 		compressInputJson,
@@ -14,6 +16,7 @@ export function useJsonCompressor(
 		compressJsonData,
 		copyToClipboard,
 		clearEditor,
+		setEditorContent,
 	} = useJsonEditor()
 
 	function initializeEditors() {
@@ -66,5 +69,6 @@ export function useJsonCompressor(
 		clearCompressInput,
 		copyCompressed,
 		initializeEditors,
+		setEditorContent,
 	}
 }

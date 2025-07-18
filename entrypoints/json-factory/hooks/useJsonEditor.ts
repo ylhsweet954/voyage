@@ -107,6 +107,8 @@ export function useJsonEditor(indentSize?: Ref<number | string>) {
 		if (editor) {
 			try {
 				editor.setText(content)
+				// 手动更新对应的响应式状态，因为 setText 不会触发 onChange 事件
+				updateJsonData(type, content)
 			} catch (error) {
 				console.warn('Failed to set editor content:', error)
 			}

@@ -1,4 +1,5 @@
 import { ref, Ref } from 'vue'
+import { useMessage } from 'naive-ui'
 import { useJsonEditor } from './useJsonEditor'
 
 export function useJsonComparator(
@@ -7,6 +8,7 @@ export function useJsonComparator(
 ) {
 	const comparing = ref(false)
 	const compareResult = ref('')
+	const message = useMessage()
 
 	const {
 		compareJsonA,
@@ -91,5 +93,6 @@ export function useJsonComparator(
 		clearCompareA,
 		clearCompareB,
 		initializeEditors,
+		setEditorContent,
 	}
 }

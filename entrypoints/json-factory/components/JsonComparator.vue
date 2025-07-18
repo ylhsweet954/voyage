@@ -4,6 +4,41 @@
 			<h3>JSON 对比</h3>
 			<p>比较两个 JSON 的差异</p>
 		</div>
+
+		<!-- 示例按钮区域 -->
+		<div class="examples-section">
+			<div class="examples-header">
+				<span class="examples-title">📚 快速示例</span>
+				<span class="examples-subtitle">点击按钮快速加载对比示例</span>
+			</div>
+			<div class="examples-buttons">
+				<n-button
+					size="small"
+					type="tertiary"
+					class="example-btn"
+					@click="loadCompareExample('xiuxian')"
+				>
+					🗡️ 凡人修仙传对比
+				</n-button>
+				<n-button
+					size="small"
+					type="tertiary"
+					class="example-btn"
+					@click="loadCompareExample('ai-tools')"
+				>
+					🤖 AI工具对比
+				</n-button>
+				<n-button
+					size="small"
+					type="tertiary"
+					class="example-btn"
+					@click="loadCompareExample('c9-universities')"
+				>
+					🎓 C9院校对比
+				</n-button>
+			</div>
+		</div>
+
 		<div class="editor-container">
 			<div class="editor-panel">
 				<div class="panel-header">
@@ -80,6 +115,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { useJsonComparator } from '../hooks/useJsonComparator'
+import { getCompareExample } from '../data/examples'
 
 const compareAEditorRef = ref<HTMLElement>()
 const compareBEditorRef = ref<HTMLElement>()
@@ -95,7 +131,17 @@ const {
 	clearCompareA,
 	clearCompareB,
 	initializeEditors,
+	setEditorContent,
 } = useJsonComparator(compareAEditorRef, compareBEditorRef)
+
+// 加载对比示例数据
+function loadCompareExample(
+	exampleKey: 'xiuxian' | 'ai-tools' | 'c9-universities'
+) {
+	const { original, modified } = getCompareExample(exampleKey)
+	setEditorContent('compareA', original)
+	setEditorContent('compareB', modified)
+}
 
 onMounted(async () => {
 	await nextTick()
@@ -229,6 +275,60 @@ onMounted(async () => {
 	}
 }
 
+// 示例按钮样式
+.examples-section {
+	background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+	border-radius: 16px;
+	padding: 20px;
+	margin-bottom: 30px;
+	border: 1px solid #e2e8f0;
+
+	.examples-header {
+		text-align: center;
+		margin-bottom: 16px;
+
+		.examples-title {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: #374151;
+			display: block;
+			margin-bottom: 4px;
+		}
+
+		.examples-subtitle {
+			font-size: 0.85rem;
+			color: #64748b;
+		}
+	}
+
+	.examples-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 12px;
+		flex-wrap: wrap;
+
+		.example-btn {
+			border-radius: 8px;
+			font-size: 0.9rem;
+			font-weight: 500;
+			transition: all 0.3s ease;
+			border: 1px solid #cbd5e1;
+			background: white;
+
+			&:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+				border-color: #3b82f6;
+				color: #3b82f6;
+			}
+
+			&:active {
+				transform: translateY(0);
+			}
+		}
+	}
+}
+
 // 响应式设计
 @media (max-width: 1200px) {
 	.editor-container {
@@ -253,6 +353,20 @@ onMounted(async () => {
 @media (max-width: 768px) {
 	.tab-content {
 		padding: 20px;
+	}
+
+	.examples-section {
+		padding: 15px;
+		margin-bottom: 20px;
+
+		.examples-buttons {
+			gap: 8px;
+
+			.example-btn {
+				font-size: 0.8rem;
+				padding: 8px 12px;
+			}
+		}
 	}
 
 	.editor-panel .editor {
