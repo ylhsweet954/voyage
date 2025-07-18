@@ -94,7 +94,7 @@ const {
 	formatCompareJsonB,
 	clearCompareA,
 	clearCompareB,
-	initializeEditors
+	initializeEditors,
 } = useJsonComparator(compareAEditorRef, compareBEditorRef)
 
 onMounted(async () => {
@@ -105,7 +105,7 @@ onMounted(async () => {
 
 <style lang="less" scoped>
 .tab-content {
-	padding: 30px;
+	padding: 0px 30px 30px;
 }
 
 .tab-header {
@@ -166,7 +166,7 @@ onMounted(async () => {
 	}
 
 	.editor {
-		height: 400px;
+		height: 500px;
 		border: none;
 
 		:deep(.jsoneditor) {
@@ -256,7 +256,7 @@ onMounted(async () => {
 	}
 
 	.editor-panel .editor {
-		height: 300px;
+		height: 350px;
 	}
 
 	.action-button {

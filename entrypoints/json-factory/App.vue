@@ -1,35 +1,33 @@
 <template>
-	<n-message-provider>
-		<div class="json-factory-container">
-			<div class="header">
-				<h1 class="title">
-					<span class="icon">🔧</span>
-					JSON 工厂
-				</h1>
-				<p class="subtitle">强大的 JSON 处理工具集</p>
-			</div>
-
-			<n-tabs
-				v-model:value="activeTab"
-				type="line"
-				size="large"
-				animated
-				class="main-tabs"
-			>
-				<n-tab-pane name="format" tab="JSON 格式化">
-					<JsonFormatter />
-				</n-tab-pane>
-
-				<n-tab-pane name="compress" tab="JSON 压缩">
-					<JsonCompressor />
-				</n-tab-pane>
-
-				<n-tab-pane name="compare" tab="JSON 对比">
-					<JsonComparator />
-				</n-tab-pane>
-			</n-tabs>
+	<div class="json-factory-container">
+		<div class="header">
+			<h1 class="title">
+				<span class="icon">🔧</span>
+				JSON 工厂
+			</h1>
+			<p class="subtitle">强大的 JSON 处理工具集</p>
 		</div>
-	</n-message-provider>
+
+		<n-tabs
+			v-model:value="activeTab"
+			type="line"
+			size="large"
+			animated
+			class="main-tabs"
+		>
+			<n-tab-pane name="format" tab="JSON 格式化">
+				<JsonFormatter />
+			</n-tab-pane>
+
+			<n-tab-pane name="compress" tab="JSON 压缩">
+				<JsonCompressor />
+			</n-tab-pane>
+
+			<n-tab-pane name="compare" tab="JSON 对比">
+				<JsonComparator />
+			</n-tab-pane>
+		</n-tabs>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -45,7 +43,7 @@ const activeTab = ref('format')
 .json-factory-container {
 	min-height: 100vh;
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	padding: 20px;
+	padding: 24px;
 	font-family:
 		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -89,7 +87,7 @@ const activeTab = ref('format')
 }
 
 .main-tabs {
-	max-width: 1400px;
+	max-width: 1800px;
 	margin: 0 auto;
 	background: white;
 	border-radius: 16px;
