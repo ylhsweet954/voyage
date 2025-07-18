@@ -85,3 +85,11 @@ pnpm zip              # Chrome打包
 ## 部署说明
 
 扩展构建后在 `.output` 目录下生成对应浏览器的扩展文件，可通过浏览器开发者模式加载或发布到应用商店。项目当前版本为 1.0.2，由 yuan.longhui@xydigit.com 维护。
+
+## 其他
+
+message提示，可以直接使用这样的格式，不需要引入native-ui的组件
+
+```ts
+message.success('JSON 格式化成功')
+```
