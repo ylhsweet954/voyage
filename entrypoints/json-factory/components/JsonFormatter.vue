@@ -20,6 +20,14 @@
 				<div ref="inputEditorRef" class="editor"></div>
 			</div>
 			<div class="action-panel">
+				<div class="format-options">
+					<n-select
+						v-model:value="indentSize"
+						:options="indentOptions"
+						size="small"
+						style="width: 120px; margin-bottom: 12px"
+					/>
+				</div>
 				<n-button
 					type="primary"
 					size="large"
@@ -59,6 +67,14 @@ import { useJsonFormatter } from '../hooks/useJsonFormatter'
 const inputEditorRef = ref<HTMLElement>()
 const outputEditorRef = ref<HTMLElement>()
 
+// 缩进选项
+const indentSize = ref(2)
+const indentOptions = [
+	{ label: '2 空格', value: 2 },
+	{ label: '4 空格', value: 4 },
+	{ label: '制表符', value: '\t' },
+]
+
 const {
 	inputJson,
 	formattedJson,
@@ -66,8 +82,8 @@ const {
 	formatJson,
 	clearInput,
 	copyFormatted,
-	initializeEditors
-} = useJsonFormatter(inputEditorRef, outputEditorRef)
+	initializeEditors,
+} = useJsonFormatter(inputEditorRef, outputEditorRef, indentSize)
 
 onMounted(async () => {
 	await nextTick()
@@ -147,8 +163,23 @@ onMounted(async () => {
 
 			.ace-jsoneditor {
 				font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
-				font-size: 13px;
-				line-height: 1.5;
+				font-size: 14px;
+				line-height: 1.6;
+				background: #ffffff !important;
+			}
+
+			// 确保代码模式下的文本选择和复制体验
+			.ace_editor {
+				background: #ffffff !important;
+			}
+
+			.ace_gutter {
+				background: #f8fafc !important;
+				border-right: 1px solid #e2e8f0;
+			}
+
+			.ace_content {
+				background: #ffffff !important;
 			}
 		}
 	}
@@ -156,9 +187,30 @@ onMounted(async () => {
 
 .action-panel {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding: 20px 0;
+
+	.format-options {
+		margin-bottom: 16px;
+		text-align: center;
+
+		:deep(.n-base-selection) {
+			border-radius: 8px;
+			border: 2px solid #e2e8f0;
+			transition: all 0.3s ease;
+
+			&:hover {
+				border-color: #cbd5e1;
+			}
+
+			&.n-base-selection--focus {
+				border-color: #3b82f6;
+				box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+			}
+		}
+	}
 
 	.action-button {
 		height: 48px;

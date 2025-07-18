@@ -1,8 +1,8 @@
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import JSONEditor, { JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.css'
 
-export function useJsonEditor() {
+export function useJsonEditor(indentSize?: Ref<number | string>) {
 	// 响应式数据
 	const inputJson = ref('')
 	const formattedJson = ref('')
@@ -24,8 +24,8 @@ export function useJsonEditor() {
 	) {
 		const options: JSONEditorOptions = {
 			mode: 'code' as const,
-			theme: 'ace/theme/monokai',
-			indentation: 2,
+			theme: 'ace/theme/github',
+			indentation: 4,
 			onChange: () => {
 				try {
 					const editor = editors.get(type)
@@ -44,9 +44,12 @@ export function useJsonEditor() {
 
 		if (readOnly) {
 			Object.assign(options, {
-				mode: 'view' as const,
+				mode: 'code' as const,
 				mainMenuBar: false,
 				navigationBar: false,
+				readOnly: true,
+				// 确保只读编辑器有更好的显示效果
+				statusBar: false,
 			})
 		}
 
@@ -123,7 +126,9 @@ export function useJsonEditor() {
 			}
 
 			const parsed = JSON.parse(inputJson.value)
-			const formatted = JSON.stringify(parsed, null, 2)
+			// 使用动态缩进，默认为 4 个空格
+			const indent = indentSize?.value || 4
+			const formatted = JSON.stringify(parsed, null, indent)
 
 			setEditorContent('output', formatted)
 			formattedJson.value = formatted

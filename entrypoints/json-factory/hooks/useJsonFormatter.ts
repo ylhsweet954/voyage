@@ -4,7 +4,8 @@ import { useJsonEditor } from './useJsonEditor'
 
 export function useJsonFormatter(
 	inputEditorRef: Ref<HTMLElement | undefined>,
-	outputEditorRef: Ref<HTMLElement | undefined>
+	outputEditorRef: Ref<HTMLElement | undefined>,
+	indentSize?: Ref<number | string>
 ) {
 	const formatting = ref(false)
 	const message = useMessage()
@@ -16,7 +17,7 @@ export function useJsonFormatter(
 		formatJsonData,
 		copyToClipboard,
 		clearEditor,
-	} = useJsonEditor()
+	} = useJsonEditor(indentSize)
 
 	function initializeEditors() {
 		// 初始化格式化编辑器
