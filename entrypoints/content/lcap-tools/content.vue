@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useContent } from './useContent'
+import { useContent } from './hooks/useContent'
 import { CloseOutlined, SwapOutlined } from '@ant-design/icons-vue'
 
 // 定义 emit 事件

@@ -9,7 +9,7 @@ import {
 	login,
 	generateJumpBtn,
 	testZteAI,
-} from './util'
+} from '../util'
 
 export function useContent() {
 	const loading = ref(false)
