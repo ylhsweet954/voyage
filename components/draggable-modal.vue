@@ -15,20 +15,12 @@
 			@mousedown="handleMouseDown"
 		>
 			<!-- 标题栏 -->
-			<div
-				ref="headerRef"
-				class="modal-header"
-				@mousedown="startDrag"
-			>
+			<div ref="headerRef" class="modal-header" @mousedown="startDrag">
 				<div class="modal-title">
 					<slot name="title">{{ title }}</slot>
 				</div>
 				<div class="modal-actions">
-					<n-button
-						text
-						size="small"
-						@click="closeModal"
-					>
+					<n-button text size="small" @click="closeModal">
 						<n-icon size="16">
 							<CloseOutlined />
 						</n-icon>
@@ -38,24 +30,11 @@
 
 			<!-- 内容区域 -->
 			<div class="modal-body">
-				<slot>
-					<div class="default-content">
-						<p>这是一个可拖拽和调节大小的弹窗</p>
-						<p>您可以：</p>
-						<ul>
-							<li>拖拽标题栏移动弹窗</li>
-							<li>拖拽右下角调节大小</li>
-							<li>点击关闭按钮关闭弹窗</li>
-						</ul>
-					</div>
-				</slot>
+				<slot></slot>
 			</div>
 
 			<!-- 调节大小的拖拽手柄 -->
-			<div
-				class="resize-handle"
-				@mousedown="startResize"
-			></div>
+			<div class="resize-handle" @mousedown="startResize"></div>
 		</div>
 	</n-modal>
 </template>
@@ -123,14 +102,17 @@ const resizeStartWidth = ref(0)
 const resizeStartHeight = ref(0)
 
 // 监听 props 变化
-watch(() => props.show, (newVal) => {
-	visible.value = newVal
-	if (newVal) {
-		nextTick(() => {
-			centerModal()
-		})
+watch(
+	() => props.show,
+	(newVal) => {
+		visible.value = newVal
+		if (newVal) {
+			nextTick(() => {
+				centerModal()
+			})
+		}
 	}
-})
+)
 
 watch(visible, (newVal) => {
 	emit('update:show', newVal)
@@ -169,7 +151,7 @@ const centerModal = () => {
 // 开始拖拽
 const startDrag = (e: MouseEvent) => {
 	if (isResizing.value) return
-	
+
 	isDragging.value = true
 	dragStartX.value = e.clientX
 	dragStartY.value = e.clientY
@@ -188,14 +170,20 @@ const handleDrag = (e: MouseEvent) => {
 	const deltaX = e.clientX - dragStartX.value
 	const deltaY = e.clientY - dragStartY.value
 
-	modalX.value = Math.max(0, Math.min(
-		window.innerWidth - modalWidth.value,
-		dragStartModalX.value + deltaX
-	))
-	modalY.value = Math.max(0, Math.min(
-		window.innerHeight - modalHeight.value,
-		dragStartModalY.value + deltaY
-	))
+	modalX.value = Math.max(
+		0,
+		Math.min(
+			window.innerWidth - modalWidth.value,
+			dragStartModalX.value + deltaX
+		)
+	)
+	modalY.value = Math.max(
+		0,
+		Math.min(
+			window.innerHeight - modalHeight.value,
+			dragStartModalY.value + deltaY
+		)
+	)
 }
 
 // 停止拖拽
@@ -228,14 +216,14 @@ const handleResize = (e: MouseEvent) => {
 	const deltaX = e.clientX - resizeStartX.value
 	const deltaY = e.clientY - resizeStartY.value
 
-	const newWidth = Math.max(props.minWidth, Math.min(
-		props.maxWidth,
-		resizeStartWidth.value + deltaX
-	))
-	const newHeight = Math.max(props.minHeight, Math.min(
-		props.maxHeight,
-		resizeStartHeight.value + deltaY
-	))
+	const newWidth = Math.max(
+		props.minWidth,
+		Math.min(props.maxWidth, resizeStartWidth.value + deltaX)
+	)
+	const newHeight = Math.max(
+		props.minHeight,
+		Math.min(props.maxHeight, resizeStartHeight.value + deltaY)
+	)
 
 	modalWidth.value = newWidth
 	modalHeight.value = newHeight
@@ -278,7 +266,7 @@ const closeModal = () => {
 	.modal-header {
 		background: #f5f5f5;
 		border-bottom: 1px solid #e8e8e8;
-		padding: 12px 16px;
+		padding: 0px 16px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

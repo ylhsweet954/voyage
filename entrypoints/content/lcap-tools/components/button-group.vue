@@ -42,7 +42,7 @@
 
 <script lang="ts" setup>
 import { Ref } from 'vue'
-import { useContent } from './hooks/useContent'
+import { useContent } from '../hooks/useContent'
 import { CloseOutlined } from '@ant-design/icons-vue'
 
 // 定义 props
