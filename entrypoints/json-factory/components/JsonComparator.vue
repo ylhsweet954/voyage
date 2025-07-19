@@ -172,7 +172,7 @@ onMounted(async () => {
 	}
 
 	.editor {
-		height: 500px;
+		height: 650px;
 		border: none;
 
 		:deep(.jsoneditor) {
@@ -273,7 +273,7 @@ onMounted(async () => {
 	}
 
 	.editor-panel .editor {
-		height: 350px;
+		height: 450px;
 	}
 
 	.action-button {
