@@ -129,7 +129,10 @@ onMounted(async () => {
 
 <style lang="less" scoped>
 .tab-content {
-	padding: 0px 30px 30px;
+	padding: 20px 30px;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .editor-container {
@@ -137,6 +140,8 @@ onMounted(async () => {
 	grid-template-columns: 1fr auto 1fr;
 	gap: 20px;
 	align-items: start;
+	flex: 1;
+	min-height: 0;
 }
 
 .editor-panel {
@@ -172,7 +177,9 @@ onMounted(async () => {
 	}
 
 	.editor {
-		height: 650px;
+		height: 550px;
+		min-height: 450px;
+		max-height: calc(100vh - 350px);
 		border: none;
 
 		:deep(.jsoneditor) {
@@ -231,7 +238,10 @@ onMounted(async () => {
 }
 
 .compare-result {
-	margin-top: 30px;
+	margin-top: 20px;
+	flex-shrink: 0;
+	max-height: 200px;
+	overflow-y: auto;
 
 	:deep(.n-alert) {
 		border-radius: 12px;
@@ -269,11 +279,11 @@ onMounted(async () => {
 
 @media (max-width: 768px) {
 	.tab-content {
-		padding: 20px;
+		padding: 15px;
 	}
 
 	.editor-panel .editor {
-		height: 450px;
+		height: calc(40vh - 80px);
 	}
 
 	.action-button {

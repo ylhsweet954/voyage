@@ -90,7 +90,10 @@ onMounted(async () => {
 
 <style lang="less" scoped>
 .tab-content {
-	padding: 0px 30px 30px;
+	padding: 20px 30px;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .editor-container {
@@ -98,6 +101,8 @@ onMounted(async () => {
 	grid-template-columns: 1fr auto 1fr;
 	gap: 20px;
 	align-items: start;
+	flex: 1;
+	min-height: 0;
 }
 
 .editor-panel {
@@ -128,7 +133,9 @@ onMounted(async () => {
 	}
 
 	.editor {
-		height: 650px;
+		height: 600px;
+		min-height: 500px;
+		max-height: calc(100vh - 300px);
 		border: none;
 
 		:deep(.jsoneditor) {
@@ -209,11 +216,11 @@ onMounted(async () => {
 
 @media (max-width: 768px) {
 	.tab-content {
-		padding: 20px;
+		padding: 15px;
 	}
 
 	.editor-panel .editor {
-		height: 450px;
+		height: calc(50vh - 100px);
 	}
 
 	.action-button {

@@ -47,12 +47,15 @@ const activeTab = ref('format')
 	padding: 24px;
 	font-family:
 		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	display: flex;
+	flex-direction: column;
 }
 
 .header {
 	text-align: center;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	color: white;
+	flex-shrink: 0;
 
 	.title {
 		font-size: 2.5rem;
@@ -87,11 +90,16 @@ const activeTab = ref('format')
 	border-radius: 16px;
 	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 600px;
 
 	:deep(.n-tabs-nav) {
 		background: #f8fafc;
 		padding: 0 20px;
 		border-bottom: 1px solid #e2e8f0;
+		flex-shrink: 0;
 
 		.n-tabs-tab {
 			font-weight: 600;
@@ -116,6 +124,13 @@ const activeTab = ref('format')
 
 	:deep(.n-tabs-pane) {
 		padding: 0;
+		flex: 1;
+		overflow: hidden;
+	}
+
+	:deep(.n-tabs-content) {
+		flex: 1;
+		overflow: hidden;
 	}
 }
 
