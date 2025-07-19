@@ -6,7 +6,7 @@ export const featureConfig: Feature[] = [
 		key: 'lcap',
 		enabled: true,
 		urlPattern:
-			'(frontendcli|frontendrenderdemo|promc|promgr|agentfrontend|uac)',
+			'(frontendcli|frontendrenderdemo|promc|promgr|agentfrontend|uac|baidu)',
 		description: '专为LCAP平台开发的小工具，方便调试低代码平台的功能',
 		usage: [
 			'测试环境UAC一键登录，账号本地存储',

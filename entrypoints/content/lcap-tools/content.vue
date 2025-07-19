@@ -41,17 +41,26 @@
 </template>
 
 <script lang="ts" setup>
+import { Ref } from 'vue'
 import { useContent } from './hooks/useContent'
-import { CloseOutlined, SwapOutlined } from '@ant-design/icons-vue'
+import { CloseOutlined } from '@ant-design/icons-vue'
 
-// 定义 emit 事件
-defineEmits<{
-	'input-focus': []
-	'input-blur': []
+// 定义 props
+const props = defineProps<{
+	modalState?: Ref<boolean>
 }>()
 
-const { buttons, empInput, handleLogin, removeCachedEmp, swapEmp } =
-	useContent()
+// 定义 emit 事件
+const emit = defineEmits<{
+	'input-focus': []
+	'input-blur': []
+	'modal-toggle': [show: boolean]
+}>()
+
+const { buttons, empInput, handleLogin, removeCachedEmp } = useContent(
+	emit,
+	props.modalState
+)
 
 const typeMap: Record<string, 'primary' | 'default' | 'warning'> = {
 	function: 'primary',
@@ -92,6 +101,31 @@ const typeMap: Record<string, 'primary' | 'default' | 'warning'> = {
 					color: #1890ff;
 				}
 			}
+		}
+	}
+}
+
+.modal-content {
+	h3 {
+		margin: 0 0 16px 0;
+		color: #333;
+		font-size: 18px;
+	}
+
+	p {
+		margin: 0 0 12px 0;
+		color: #666;
+		line-height: 1.6;
+	}
+
+	ul {
+		margin: 0 0 20px 0;
+		padding-left: 20px;
+		color: #666;
+
+		li {
+			margin-bottom: 8px;
+			line-height: 1.5;
 		}
 	}
 }
