@@ -6,7 +6,6 @@
 					<span class="icon">🔧</span>
 					JSON 工厂
 				</h1>
-				<p class="subtitle">强大的 JSON 处理工具集</p>
 			</div>
 
 			<n-tabs
@@ -69,13 +68,6 @@ const activeTab = ref('format')
 			font-size: 2.2rem;
 			animation: rotate 3s linear infinite;
 		}
-	}
-
-	.subtitle {
-		font-size: 1.1rem;
-		opacity: 0.9;
-		margin: 0;
-		font-weight: 300;
 	}
 }
 
