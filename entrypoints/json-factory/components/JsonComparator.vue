@@ -145,27 +145,26 @@ onMounted(async () => {
 }
 
 .editor-panel {
-	background: #f8fafc;
-	border-radius: 12px;
-	border: 2px solid #e2e8f0;
+	background: white;
+	border-radius: 6px;
+	border: 1px solid #e5e7eb;
 	overflow: hidden;
-	transition: all 0.3s ease;
+	transition: border-color 0.2s ease;
 
 	&:hover {
-		border-color: #cbd5e1;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		border-color: #d1d5db;
 	}
 
 	.panel-header {
-		background: white;
+		background: #f9fafb;
 		padding: 12px 16px;
-		border-bottom: 1px solid #e2e8f0;
+		border-bottom: 1px solid #e5e7eb;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 
 		.panel-title {
-			font-weight: 600;
+			font-weight: 500;
 			color: #374151;
 			font-size: 0.9rem;
 		}
@@ -187,8 +186,8 @@ onMounted(async () => {
 			border-radius: 0;
 
 			.jsoneditor-menu {
-				background: #f1f5f9;
-				border-bottom: 1px solid #e2e8f0;
+				background: #f9fafb;
+				border-bottom: 1px solid #e5e7eb;
 			}
 
 			.ace-jsoneditor {
@@ -218,17 +217,15 @@ onMounted(async () => {
 	}
 
 	.action-button {
-		height: 48px;
-		padding: 0 32px;
-		font-size: 1rem;
-		font-weight: 600;
-		border-radius: 12px;
-		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-		transition: all 0.3s ease;
+		height: 44px;
+		padding: 0 24px;
+		font-size: 0.95rem;
+		font-weight: 500;
+		border-radius: 6px;
+		transition: all 0.2s ease;
 
 		&:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+			transform: translateY(-1px);
 		}
 
 		&:active {
@@ -244,9 +241,8 @@ onMounted(async () => {
 	overflow-y: auto;
 
 	:deep(.n-alert) {
-		border-radius: 12px;
-		border: none;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		border-radius: 6px;
+		border: 1px solid #e5e7eb;
 
 		.n-alert__content {
 			font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;

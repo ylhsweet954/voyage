@@ -43,7 +43,7 @@ const activeTab = ref('format')
 <style lang="less" scoped>
 .json-factory-container {
 	min-height: 100vh;
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background: #f7f5f0;
 	padding: 24px;
 	font-family:
 		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -53,22 +53,21 @@ const activeTab = ref('format')
 
 .header {
 	text-align: center;
-	margin-bottom: 20px;
-	color: white;
+	margin-bottom: 32px;
+	color: #2c3e50;
 	flex-shrink: 0;
 
 	.title {
-		font-size: 2.5rem;
-		font-weight: 700;
-		margin: 0 0 10px 0;
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+		font-size: 2rem;
+		font-weight: 600;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 12px;
+		gap: 8px;
 
 		.icon {
 			font-size: 2.2rem;
+			margin-right: 24px;
 			animation: rotate 3s linear infinite;
 		}
 	}
@@ -86,9 +85,9 @@ const activeTab = ref('format')
 .main-tabs {
 	max-width: 1800px;
 	margin: 0 auto;
-	background: white;
-	border-radius: 16px;
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+	background: #fefcf8;
+	border-radius: 8px;
+	border: 1px solid #e8e4dc;
 	overflow: hidden;
 	flex: 1;
 	display: flex;
@@ -96,28 +95,26 @@ const activeTab = ref('format')
 	min-height: 600px;
 
 	:deep(.n-tabs-nav) {
-		background: #f8fafc;
+		background: #fefcf8;
 		padding: 0 20px;
-		border-bottom: 1px solid #e2e8f0;
+		border-bottom: 1px solid #e8e4dc;
 		flex-shrink: 0;
 
 		.n-tabs-tab {
-			font-weight: 600;
-			font-size: 1rem;
-			padding: 16px 24px;
-			color: #64748b;
-			transition: all 0.3s ease;
+			font-weight: 500;
+			font-size: 0.95rem;
+			padding: 14px 20px;
+			color: #6b7280;
+			transition: all 0.2s ease;
 
 			&:hover {
-				color: #3b82f6;
+				color: #374151;
 			}
 
 			&.n-tabs-tab--active {
-				color: #3b82f6;
-				background: white;
-				border-radius: 8px 8px 0 0;
-				margin-bottom: -1px;
-				border-bottom: 2px solid #3b82f6;
+				color: #111827;
+				background: transparent;
+				border-bottom: 2px solid #111827;
 			}
 		}
 	}
