@@ -11,10 +11,6 @@ const packageJson = JSON.parse(
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-	extensionApi: 'chrome',
-	runner: {
-		openConsole: true,
-	},
 	modules: ['@wxt-dev/module-vue'],
 	manifest: {
 		permissions: [

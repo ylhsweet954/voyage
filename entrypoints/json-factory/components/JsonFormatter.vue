@@ -1,43 +1,7 @@
 <template>
 	<div class="tab-content">
-		<div class="tab-header">
-			<h3>JSON 格式化</h3>
-			<p>将压缩的 JSON 转换为易读的格式</p>
-		</div>
-
 		<!-- 示例按钮区域 -->
-		<div class="examples-section">
-			<div class="examples-header">
-				<span class="examples-title">📚 快速示例</span>
-				<span class="examples-subtitle">点击按钮快速体验功能</span>
-			</div>
-			<div class="examples-buttons">
-				<n-button
-					size="small"
-					type="tertiary"
-					class="example-btn"
-					@click="loadExample('xiuxian')"
-				>
-					🗡️ 凡人修仙传
-				</n-button>
-				<n-button
-					size="small"
-					type="tertiary"
-					class="example-btn"
-					@click="loadExample('ai-tools')"
-				>
-					🤖 AI工具信息
-				</n-button>
-				<n-button
-					size="small"
-					type="tertiary"
-					class="example-btn"
-					@click="loadExample('c9-universities')"
-				>
-					🎓 C9院校信息
-				</n-button>
-			</div>
-		</div>
+		<JsonExamples @load-example="loadExample" />
 
 		<div class="editor-container">
 			<div class="editor-panel">
@@ -55,6 +19,9 @@
 				<div ref="inputEditorRef" class="editor"></div>
 			</div>
 			<div class="action-panel">
+				<div class="action-description">
+					<span class="description-text">将压缩的 JSON 转换为易读的格式</span>
+				</div>
 				<div class="format-options">
 					<n-select
 						v-model:value="indentSize"
@@ -99,6 +66,7 @@
 import { ref, onMounted, nextTick } from 'vue'
 import { useJsonFormatter } from '../hooks/useJsonFormatter'
 import { getCompressedExample } from '../data/examples'
+import JsonExamples from './JsonExamples.vue'
 
 const inputEditorRef = ref<HTMLElement>()
 const outputEditorRef = ref<HTMLElement>()
@@ -123,8 +91,10 @@ const {
 } = useJsonFormatter(inputEditorRef, outputEditorRef, indentSize)
 
 // 加载示例数据
-function loadExample(exampleKey: 'xiuxian' | 'ai-tools' | 'c9-universities') {
-	const exampleData = getCompressedExample(exampleKey)
+function loadExample(exampleKey: string) {
+	const exampleData = getCompressedExample(
+		exampleKey as 'xiuxian' | 'ai-tools' | 'c9-universities'
+	)
 	setEditorContent('input', exampleData)
 }
 
@@ -137,24 +107,6 @@ onMounted(async () => {
 <style lang="less" scoped>
 .tab-content {
 	padding: 0px 30px 30px;
-}
-
-.tab-header {
-	text-align: center;
-	margin-bottom: 30px;
-
-	h3 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		color: #1e293b;
-		margin: 0 0 8px 0;
-	}
-
-	p {
-		color: #64748b;
-		margin: 0;
-		font-size: 0.95rem;
-	}
 }
 
 .editor-container {
@@ -235,6 +187,16 @@ onMounted(async () => {
 	justify-content: center;
 	padding: 20px 0;
 
+	.action-description {
+		margin-bottom: 12px;
+
+		.description-text {
+			font-size: 0.85rem;
+			color: #64748b;
+			font-weight: 500;
+		}
+	}
+
 	.format-options {
 		margin-bottom: 16px;
 		text-align: center;
@@ -296,77 +258,9 @@ onMounted(async () => {
 	}
 }
 
-// 示例按钮样式
-.examples-section {
-	background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-	border-radius: 16px;
-	padding: 20px;
-	margin-bottom: 30px;
-	border: 1px solid #e2e8f0;
-
-	.examples-header {
-		text-align: center;
-		margin-bottom: 16px;
-
-		.examples-title {
-			font-size: 1.1rem;
-			font-weight: 600;
-			color: #374151;
-			display: block;
-			margin-bottom: 4px;
-		}
-
-		.examples-subtitle {
-			font-size: 0.85rem;
-			color: #64748b;
-		}
-	}
-
-	.examples-buttons {
-		display: flex;
-		justify-content: center;
-		gap: 12px;
-		flex-wrap: wrap;
-
-		.example-btn {
-			border-radius: 8px;
-			font-size: 0.9rem;
-			font-weight: 500;
-			transition: all 0.3s ease;
-			border: 1px solid #cbd5e1;
-			background: white;
-
-			&:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-				border-color: #3b82f6;
-				color: #3b82f6;
-			}
-
-			&:active {
-				transform: translateY(0);
-			}
-		}
-	}
-}
-
 @media (max-width: 768px) {
 	.tab-content {
 		padding: 20px;
-	}
-
-	.examples-section {
-		padding: 15px;
-		margin-bottom: 20px;
-
-		.examples-buttons {
-			gap: 8px;
-
-			.example-btn {
-				font-size: 0.8rem;
-				padding: 8px 12px;
-			}
-		}
 	}
 
 	.editor-panel .editor {
