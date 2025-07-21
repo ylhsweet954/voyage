@@ -40,7 +40,7 @@ import {
 const visible = ref(false)
 const inputFocused = ref(false)
 const mouseInside = ref(false)
-const showModal = ref(true)
+const showModal = ref(false)
 let showTimer: ReturnType<typeof setTimeout> | null = null
 
 // 创建一个计算属性来传递给子组件

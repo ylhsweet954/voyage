@@ -66,16 +66,16 @@ export function useContent(emit?: any, modalState?: Ref<boolean>) {
 
 	// 可以添加其他类型的按钮
 	const otherButtons = computed<FeatureButton[]>(() => [
-		{
-			label: modalState?.value ? '关闭弹窗' : '打开弹窗',
-			type: 'function',
-			handler: () => {
-				if (emit) {
-					emit('modal-toggle', !modalState?.value)
-				}
-			},
-			isDefault: true,
-		},
+		// {
+		// 	label: modalState?.value ? '关闭弹窗' : '打开弹窗',
+		// 	type: 'function',
+		// 	handler: () => {
+		// 		if (emit) {
+		// 			emit('modal-toggle', !modalState?.value)
+		// 		}
+		// 	},
+		// 	isDefault: true,
+		// },
 		{
 			label: '请求AI服务',
 			type: 'other',
